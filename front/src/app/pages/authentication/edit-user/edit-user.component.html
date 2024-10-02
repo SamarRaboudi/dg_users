@@ -1,0 +1,25 @@
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+    <h2>Edit User</h2>
+    <mat-dialog-content [formGroup]="editUserForm">
+      <form [formGroup]="editUserForm" style="width: 100%; max-width: 400px;">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required />
+          <mat-error *ngIf="editUserForm.get('email')?.invalid">Email is required</mat-error>
+        </mat-form-field>
+  
+        <h3>Roles</h3>
+        <div formArrayName="roles" style="width: 100%;">
+          <div *ngFor="let role of rolesList; let i = index">
+            <mat-checkbox [formControlName]="i">{{ role }}</mat-checkbox>
+          </div>
+        </div>
+  
+        <div style="margin-top: 16px;">
+          <button mat-button (click)="close()">Cancel</button>
+          <button mat-button [disabled]="editUserForm.invalid" (click)="save()">Save</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+  </div>
+  
